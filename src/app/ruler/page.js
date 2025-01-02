@@ -11,10 +11,10 @@ export default function RulerGame() {
   const router = useRouter(); // 라우터 객체
   const animationFrameId = useRef(null); // 애니메이션 프레임 ID
   const positionRef = useRef(-800); // 자의 현재 Y 좌표 (로컬 변수)
-  const startTimeRef = useRef(null); // 애니메이션 시작 시간
+
+  const scalePerPixel = 0.01503; // 픽셀당 눈금 증가율
 
   const convertPositionToScale = (position) => {
-    const scalePerPixel = 0.01503; // 픽셀당 눈금 증가율
     const adjustedPosition = position + 800; // 초기 위치 보정
     return (adjustedPosition * scalePerPixel).toFixed(1);
   };
@@ -23,20 +23,21 @@ export default function RulerGame() {
     setPosition(-800);
     positionRef.current = -800; // 초기 위치 설정
     setIsFalling(true);
-    startTimeRef.current = performance.now(); // 시작 시간 기록
+
+    const speed = 35; // 위치 증가 속도
 
     const animate = () => {
-      const elapsedTime = performance.now() - startTimeRef.current; // 경과 시간
-      positionRef.current = -800 + (elapsedTime / 20) * 30; // 떨어지는 거리 계산
+      positionRef.current += speed; // 일정한 속도로 증가
+      setPosition(positionRef.current); // 상태 업데이트
 
       if (positionRef.current >= window.innerHeight - 71) {
+        // 자가 바닥에 도달했을 때 처리
         setIsFalling(false);
         setPosition(window.innerHeight - 71); // 바닥 위치로 설정
         handleFailure();
         return;
       }
 
-      setPosition(positionRef.current); // 상태 업데이트
       animationFrameId.current = requestAnimationFrame(animate); // 다음 프레임 요청
     };
 
