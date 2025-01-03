@@ -33,7 +33,14 @@ function GetResult() {
   };
   return (
     <div className="container">
-      <video className="bg-video__content" autoPlay muted loop>
+      <video
+        className="bg-video__content"
+        autoPlay
+        muted
+        loop
+        playsInline
+        webkit-playsinline="true"
+      >
         <source src="/background.mp4" type="video/mp4" />
       </video>
       <h1>게임 결과</h1>
