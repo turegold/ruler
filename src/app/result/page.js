@@ -1,8 +1,13 @@
 "use client"; // Client Component 설정
 
 import { useRouter, useSearchParams } from "next/navigation";
+import { Suspense } from "react";
 import "../ruler.css";
-export default function ResultPage() {
+
+// 페이지를 강제로 동적 렌더링
+export const dynamic = "force-dynamic";
+
+function GetResult() {
   const router = useRouter();
   const searchParams = useSearchParams();
   const status = searchParams.get("status");
@@ -18,16 +23,14 @@ export default function ResultPage() {
     return ""; // scale이 없거나 잘못된 경우
   };
 
-  // scale에 따른 멘트 결정 함수
   const getScaleEmoji = (scale) => {
     if (scale >= 0 && scale <= 4) return "👑";
     if (scale > 4 && scale <= 6) return "👍";
-    if (scale > 6 && scale <= 8) return " 😆";
+    if (scale > 6 && scale <= 8) return "😆";
     if (scale > 8 && scale <= 11) return "👀";
     if (scale > 11) return "🐢";
     return ""; // scale이 없거나 잘못된 경우
   };
-
   return (
     <div className="container">
       <video className="bg-video__content" autoPlay muted loop>
@@ -65,5 +68,13 @@ export default function ResultPage() {
         다시 하기
       </button>
     </div>
+  );
+}
+
+export default function ResultPage() {
+  return (
+    <Suspense>
+      <GetResult />
+    </Suspense>
   );
 }
