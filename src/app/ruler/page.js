@@ -121,6 +121,7 @@ export default function RulerGame() {
 
       {countdown === 0 && (
         <img
+          className="ruler-img"
           src="/ruler.png"
           alt="Ruler"
           style={{
@@ -128,8 +129,7 @@ export default function RulerGame() {
             top: `${position}px`,
             left: "50%",
             transform: "translateX(-50%)",
-            width: "300px",
-            height: "1000px",
+
             objectFit: "contain",
           }}
         />

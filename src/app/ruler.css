@@ -18,6 +18,10 @@
   z-index: -1; /* 배경으로 설정 */
 }
 
+.ruler-img {
+  width: 300px;
+  height: 1000px;
+}
 h1 {
   font-size: 48px;
   color: white;
@@ -47,4 +51,52 @@ button {
 
 button:hover {
   background-color: #ffbb3f;
+}
+
+video {
+  -webkit-user-select: none;
+  -webkit-overflow-scrolling: touch;
+}
+
+@media screen and (max-width: 768px) {
+  /* 모바일 환경에서 UI 크기 조정 */
+  .container {
+    font-size: 10px; /* 기본 글꼴 크기 줄이기 */
+    padding: 10px;
+  }
+
+  h1 {
+    font-size: 24px; /* 제목 크기 줄이기 */
+  }
+  h3 {
+    font-size: 20px;
+    color: rgb(0, 0, 0);
+    z-index: 1; /* 텍스트를 최상위에 위치 */
+  }
+  button {
+    z-index: 1; /* 버튼을 최상위에 위치 */
+    padding: 20px 40px;
+    min-width: 120px;
+    min-height: 50px;
+    font-size: 20px;
+    color: white;
+    background-color: #ffa500;
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.7); /* 버튼 텍스트 가독성 추가 */
+  }
+
+  .bg-video__content {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    object-fit: cover; /* 비율 유지하면서 컨테이너 채우기 */
+  }
+
+  p {
+    font-size: 20px;
+  }
 }
